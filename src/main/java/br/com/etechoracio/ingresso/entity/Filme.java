@@ -64,4 +64,7 @@ public class Filme {
     @Transient //Não tem coluna no banco de dados
     private List<Sessao> sessoes;
 
+    public void setSessoes(List<Sessao> sessoes) {
+
+    }
 }

@@ -12,5 +12,5 @@ public interface SalaRepository extends JpaRepository<Sala, Long> {
 
     @Query("SELECT s FROM Sala s WHERE s.dataExclusao IS NULL")
     List<Sala> findByIdSala(Long id,
-                                       LocalDateTime dataExclusao);
+                            LocalDateTime dataExclusao);
 }

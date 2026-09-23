@@ -17,12 +17,13 @@ public class SalaController {
     private SalaService salaService;
 
     @GetMapping("/{id}/salas")
-    public List<SalaResponseDTO> findByIdSalaDisponivel(@PathVariable Long id){
+    public ResponseEntity<List<SalaResponseDTO>> findByIdSalaDisponivel(@PathVariable Long id) {
         var result = salaService.findByIdSala(id);
-        if(result.isPresent()){
+        if (result.isPresent()) {
             return ResponseEntity.ok(result.get());
-        }else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
+
 }
