@@ -1,5 +1,6 @@
 package br.com.etechoracio.ingresso.controller;
 
+import br.com.etechoracio.ingresso.dto.RequestDTO;
 import br.com.etechoracio.ingresso.dto.SalaResponseDTO;
 import br.com.etechoracio.ingresso.service.SalaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,11 @@ public class SalaController {
         } else {
             return ResponseEntity.status(404).build();
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<SalaResponseDTO> criarSala(@RequestBody RequestDTO dto) {
+        SalaResponseDTO novaSala = salaService.criarSala(dto);
+        return ResponseEntity.status(201).body(novaSala);
     }
 }

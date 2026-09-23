@@ -1,6 +1,8 @@
 package br.com.etechoracio.ingresso.service;
 
+import br.com.etechoracio.ingresso.dto.RequestDTO;
 import br.com.etechoracio.ingresso.dto.SalaResponseDTO;
+import br.com.etechoracio.ingresso.entity.Sala;
 import br.com.etechoracio.ingresso.mapper.SalaMapper;
 import br.com.etechoracio.ingresso.repository.SalaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +29,12 @@ public class SalaService
     public List<SalaResponseDTO> listarsSalasDisponiveis() {
         var salas = salaRepository.findByDataExclusaoIsNull();
         return salaMapper.toRespostaDTOList(salas);
+    }
+
+    public SalaResponseDTO criarSala(RequestDTO dto) {
+        Sala salaEntity = salaMapper.toEntity(dto);
+        Sala salaSalva = salaRepository.save(salaEntity);
+        SalaResponseDTO respostaDTO = salaMapper.toDTO(salaSalva);
+        return respostaDTO;
     }
 }
