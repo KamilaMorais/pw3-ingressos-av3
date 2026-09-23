@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SalaService {
+public class SalaService
+{
 
     @Autowired
     private SalaRepository salaRepository;
@@ -19,11 +20,12 @@ public class SalaService {
     @Autowired
     private SalaMapper salaMapper;
 
-    public Optional<List<SalaResponseDTO>> findByIdSala(Long id) {
-        return salaRepository.findById(id)
-            .map(sala -> {
-                var salas = salaRepository.findByIdSala(id, LocalDateTime.now());
-                return salaMapper.toRespostaDTOList(salas);
-            });
+    public Optional<SalaResponseDTO> findByIdSala(Long id) {
+        return salaRepository.findByIdAndDataExclusaoIsNull(id)
+                .map(salaMapper::toDTO);
     }
+    public List<SalaResponseDTO> listarsSalasDisponiveis() {
+        var salas = salaRepository.findByDataExclusaoIsNull();
+        return salaMapper.toRespostaDTOList(salas);
     }
+}

@@ -2,7 +2,6 @@ package br.com.etechoracio.ingresso.controller;
 
 import br.com.etechoracio.ingresso.dto.FilmeResponseDTO;
 import br.com.etechoracio.ingresso.dto.FilmeSessoesResponseDTO;
-import br.com.etechoracio.ingresso.entity.Sessao;
 import br.com.etechoracio.ingresso.service.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +24,12 @@ public class FilmeController {
     }
 
     @GetMapping("/{id}/sessoes")
-    public ResponseEntity<FilmeSessoesResponseDTO> findBySessoesByFilmeId(@PathVariable Long id){
+    public ResponseEntity<FilmeSessoesResponseDTO> findBySessoesByFilmeId(@PathVariable Long id)
+    {
         var result = filmeService.findByIdWithSessoes(id);
         if(result.isPresent()){
             return ResponseEntity.ok(result.get());
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
